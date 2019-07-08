@@ -16,7 +16,8 @@ class Thingies extends Component {
                     id: 2,
                     entered_value: 'you put more stuff here',
                     badge_value: 'heey'
-                }]
+                }],
+            id_count:2
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -45,10 +46,23 @@ class Thingies extends Component {
       this.setState({thingies});
   }
 
+  handleAdd = thingy => {
+        const thingies = [...this.state.thingies];
+        let id_count = [this.state.id_count][0];
+        id_count = id_count + 1;
+        thingies.push({id:id_count, entered_value:'type type type!', badge_value:'hey'});
+        this.setState({thingies});
+        this.setState({id_count});
+    }
+
   render () {
 
     return(
         <React.Fragment>
+            <nav className={"navbar navbar-light bg-light"}>  Thingies!
+                <span className={"badge badge-warning m-2"}>None</span>
+                <button onClick={this.handleAdd} className={"btn btn-light m-2"}>Make More</button>
+            </nav>
             { this.state.thingies.map(thingy => (
                 <Thingy
                     key={thingy.id}
