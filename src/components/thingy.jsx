@@ -23,11 +23,45 @@ class Thingy extends Component {
 
   }
 
+  chooseBuildType() {
+        // console.log(this.props.thingy.type);
+        let result = (this.props.thingy.type === 'textBox') ?  this.buildTextBox() : this.buildGraphic();
+        return (result)
+}
+
+  buildGraphic(){
+        return (
+            <div
+                className={"badge-dark m-5"}
+                style={{display: 'inline-block'}}
+            >
+          <span
+                className={"badge badge-warning m-2"}
+            >
+              {this.props.thingy.badge_value}
+          </span>
+          {/*<button*/}
+          {/*    className={"btn btn-sm btn-primary m-2"}*/}
+          {/*      onClick={() => this.props.onSubmit(this.props.thingy)}*/}
+          {/*>Hey*/}
+          {/*</button>*/}
+          <input
+                type="text"
+                value={this.props.thingy.entered_value}
+                className={"badge-light m-2"}
+                onChange={this.handleChange}
+          />
+          {/*<button*/}
+          {/*      className={"btn btn-danger m-2"}*/}
+          {/*      onClick={() => this.props.onDelete(this.props.thingy.id)}*/}
+          {/*      >Ciao*/}
+          {/*</button>*/}
+          </div>)
+  }
 
 
-  render () {
-    return(
-        <React.Fragment>
+  buildTextBox(){
+        return (
             <div
                 className={"badge-dark m-5"}
                 style={{display: 'inline-block'}}
@@ -53,8 +87,14 @@ class Thingy extends Component {
                 onClick={() => this.props.onDelete(this.props.thingy.id)}
                 >Ciao
           </button>
-          </div>
+          </div>)
+  }
 
+
+  render () {
+    return(
+        <React.Fragment>
+            {this.chooseBuildType()}
         </React.Fragment>)
   }
 
